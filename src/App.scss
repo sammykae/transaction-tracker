@@ -1,0 +1,58 @@
+.loader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+.ldio-mph5mei0g5 div {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	border: 20px solid rgb(243, 38, 32);
+	border-top-color: transparent;
+	border-radius: 50%;
+}
+.ldio-mph5mei0g5 div {
+	animation: ldio-mph5mei0g5 1.1363636363636365s linear infinite;
+	top: 150.5px;
+	left: 150.5px;
+}
+.loadingio-spinner-rolling-o108v2mvurl {
+	width: 300px;
+	height: 300px;
+	display: inline-block;
+	overflow: hidden;
+	background: none;
+}
+.ldio-mph5mei0g5 {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transform: translateZ(0) scale(1);
+	backface-visibility: hidden;
+	transform-origin: 0 0; /* see note above */
+}
+.ldio-mph5mei0g5 div {
+	box-sizing: content-box;
+}
+@keyframes ldio-mph5mei0g5 {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+body::-webkit-scrollbar-track {
+	box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: rgb(243, 38, 32);
+	// outline: 1px solid #1976d2;
+}
+body::-webkit-scrollbar {
+	width: 8px;
+	height: 5px;
+}

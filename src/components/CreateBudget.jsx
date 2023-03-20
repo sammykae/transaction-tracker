@@ -1,0 +1,87 @@
+import { Button, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useState } from "react";
+import { Colors } from "../components/Colors";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import moment from "moment/moment";
+import { CustomInputFull, CustomInputDate } from "../components/CustomInput";
+import { toast } from "react-toastify";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from "../components/fire";
+const CreateBudget = () => {
+	const [value, setValue] = useState(moment());
+	const [amount, setAmount] = useState("");
+	const setBudget = async (e) => {
+		e.preventDefault();
+		const docRef = doc(db, "budget", value.format("MM-YYYY"));
+		const docSnap = await getDoc(docRef);
+		if (docSnap.exists()) {
+			toast.info("Budget Already Exist");
+		} else {
+			await setDoc(doc(db, "budget", value.format("MM-YYYY")), {
+				amount: amount,
+				for: value.format("MM-YYYY"),
+			})
+				.then(() => {
+					setAmount("");
+					toast.success("Budget Set Successfully");
+				})
+				.catch((err) => {
+					console.log(err);
+					toast.error(err?.code);
+				});
+		}
+	};
+	return (
+		<Box component={"form"} onSubmit={setBudget}>
+			<Typography variant="h4">Set Budget</Typography>
+			<Box
+				sx={{
+					mt: 3,
+					width: { md: "95%", lg: "88%" },
+					display: { xs: "block", sm: "flex" },
+					columnGap: 5,
+				}}
+			>
+				<CustomInputFull
+					value={Number(amount) > 0 ? Number(amount) : ""}
+					onChange={(e) => setAmount(Number(e.target.value))}
+					fullWidth
+					required
+					type={"number"}
+					label="Enter Budget"
+				/>
+				<LocalizationProvider dateAdapter={AdapterMoment}>
+					<CustomInputDate
+						sx={{ width: "100%", mt: { xs: 2, sm: 0 } }}
+						label="Select Date"
+						value={value}
+						disableFuture
+						disablePast
+						views={["month", "year"]}
+						onChange={(newValue) => setValue(newValue)}
+					/>
+				</LocalizationProvider>
+			</Box>
+			<Box sx={{ mt: 2 }}>
+				<Button
+					size="large"
+					type="submit"
+					variant="contained"
+					sx={{
+						width: { xs: "100%", sm: "20%" },
+						backgroundColor: Colors.primary,
+						"&:hover": {
+							backgroundColor: Colors.hover,
+						},
+					}}
+				>
+					Save
+				</Button>
+			</Box>
+		</Box>
+	);
+};
+
+export default CreateBudget;
