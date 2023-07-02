@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyD6tA3Vsy5p-7uGXlxZrd0gw8T-RI24zR4",
-	authDomain: "expense-tracker-c19e7.firebaseapp.com",
-	projectId: "expense-tracker-c19e7",
-	storageBucket: "expense-tracker-c19e7.appspot.com",
-	messagingSenderId: "973539468894",
-	appId: "1:973539468894:web:aa227208d1d849340076cf",
-	measurementId: "G-F83SQ6GZSD",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_APPID,
+  measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
 
 const app = initializeApp(firebaseConfig);
