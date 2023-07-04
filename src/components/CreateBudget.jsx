@@ -78,14 +78,14 @@ const CreateBudget = () => {
           type="submit"
           variant="contained"
           sx={{
-            width: { xs: "100%", sm: "20%" },
+            width: { xs: "100%", sm: "30vw", md: "20vw" },
             backgroundColor: Colors.primary,
             "&:hover": {
               backgroundColor: Colors.hover,
             },
           }}
         >
-          {some ? "Edit" : "Save"}
+          {some ? "Edit Budget" : "Set Budget"}
         </Button>
       </Box>
     </Box>

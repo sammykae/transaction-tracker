@@ -1,12 +1,5 @@
 import { Box, Paper, Typography } from "@mui/material";
-import {
-  collection,
-  onSnapshot,
-  query,
-  where,
-  doc,
-  getDoc,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -39,19 +32,25 @@ const Overview = () => {
       });
     };
     const getBudget = async () => {
-      const docRef = doc(db, "budget", moment().format("MM-YYYY"));
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setBudget(docSnap.data());
-      } else {
-        toast.warning("You have not set a Budget for this month");
-      }
+      const q = query(
+        collection(db, "budget"),
+        where("for", "==", moment().format("MM-YYYY"))
+      );
+      onSnapshot(q, (querySnapshot) => {
+        const data = [];
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data());
+        });
+        if (data.length <= 0) {
+          toast.show("You have not set a Budget for this month", 3000);
+        } else {
+          setBudget(data[0]);
+        }
+      });
     };
     getData();
     getBudget();
   }, []);
-  useEffect(() => {}, []);
 
   return (
     <Box>

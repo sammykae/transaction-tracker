@@ -118,7 +118,7 @@ const History = () => {
               },
             }}
           >
-            Save
+            Query
           </Button>
         </Box>
       </Box>
