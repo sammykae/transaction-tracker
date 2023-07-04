@@ -24,7 +24,9 @@ const Routers = () => {
       } else {
         setLoggedin(false);
       }
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, [1500]);
     });
   }, []);
   return (
