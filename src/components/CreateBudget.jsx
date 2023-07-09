@@ -13,18 +13,21 @@ const CreateBudget = () => {
   const [value, setValue] = useState(moment());
   const [amount, setAmount] = useState("");
   const [some, setSome] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const setBudget = async (e) => {
     e.preventDefault();
+    setLoading(true);
     await setDoc(doc(db, "budget", value.format("MM-YYYY")), {
       amount: amount,
       for: value.format("MM-YYYY"),
     })
       .then(() => {
         toast.success("Budget Set Successfully");
+        setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setLoading(false);
         toast.error(err?.code);
       });
   };
@@ -85,7 +88,7 @@ const CreateBudget = () => {
             },
           }}
         >
-          {some ? "Edit Budget" : "Set Budget"}
+          {loading ? "Please Wait" : some ? "Edit Budget" : "Set Budget"}
         </Button>
       </Box>
     </Box>
