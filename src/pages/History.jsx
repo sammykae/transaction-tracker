@@ -24,10 +24,7 @@ const History = () => {
   const [loading, setLoading] = useState(false);
   const handleFilter = (e) => {
     e.preventDefault();
-    if (loading) {
-      toast.warning("Please Wait");
-      return;
-    }
+
     setLoading(true);
     if (view?.length > 2) {
       const q = query(
@@ -123,7 +120,7 @@ const History = () => {
               },
             }}
           >
-            Query
+            {loading ? "Please wait" : "Query"}
           </Button>
         </Box>
       </Box>
