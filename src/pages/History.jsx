@@ -16,7 +16,6 @@ import moment from "moment";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../components/fire";
 import Loader from "../components/Loader";
-import { toast } from "react-toastify";
 const History = () => {
   const [value, setValue] = useState(moment());
   const [view, setView] = useState("");
