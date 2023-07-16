@@ -15,6 +15,10 @@ const CreateIncome = () => {
   const [loading, setLoading] = useState(false);
   const setIncome = async (e) => {
     e.preventDefault();
+    if (loading) {
+      toast.warning("Please Wait");
+      return;
+    }
     setLoading(true);
     if (moment().month() > value?.month()) {
       if (value.diff(moment(), "days") < -5) {

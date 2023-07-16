@@ -17,6 +17,10 @@ const CreateBudget = () => {
 
   const setBudget = async (e) => {
     e.preventDefault();
+    if (loading) {
+      toast.warning("Please Wait");
+      return;
+    }
     setLoading(true);
     await setDoc(doc(db, "budget", value.format("MM-YYYY")), {
       amount: amount,
